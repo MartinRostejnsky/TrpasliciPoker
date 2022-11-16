@@ -10,12 +10,13 @@ namespace TrpasliciPoker
     internal class Round
     {
         private List<Dice> _Dices = new List<Dice>();
+        private bool _Value; //Player1Win = true; Player2Win = false; pro "jednoduchost"
 
         public Round(int dices)
         {
             for (int i = 0; i < dices; i++)
             {
-                _Dices.Add(new Dice());
+                _Dices.Add(new Dice(6));
             }
         }
 
@@ -73,6 +74,12 @@ namespace TrpasliciPoker
         public void SwitchLock(Dice target)
         {
             target.Locked = (!target.Locked);
+        }
+
+        public bool Value
+        {
+            get { return _Value; }
+            set { _Value = value; }
         }
     }
 }

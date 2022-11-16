@@ -9,11 +9,12 @@ namespace TrpasliciPoker
     internal class Dice
     {
         private int _Value;
-        private int _Size = 6;
+        private int _Size;
         private bool _Locked = false;
 
-        public Dice()
+        public Dice(int sides)
         {
+            _Size = sides;
         }
 
         public bool Roll()
