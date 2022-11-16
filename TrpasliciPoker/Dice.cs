@@ -9,12 +9,11 @@ namespace TrpasliciPoker
     internal class Dice
     {
         private int _Value;
-        private int _Size;
-        private bool _Locked;
+        private int _Size = 6;
+        private bool _Locked = false;
 
-        public Dice(int sides)
+        public Dice()
         {
-            _Size = sides;
         }
 
         public bool Roll()
@@ -33,6 +32,18 @@ namespace TrpasliciPoker
         public int Value
         {
             get { return _Value; }
+        }
+
+        public int Size
+        {
+            get { return _Size; }
+            set { _Size = value; }
+        }
+
+        public bool Locked
+        {
+            get { return _Locked; }
+            set { _Locked = value; }
         }
     }
 }

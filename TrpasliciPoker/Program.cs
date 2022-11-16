@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using TrpasliciPoker;
+
 Console.WriteLine("Hello, World!");
+
+Round rnd = new Round(6);
+
+foreach (string x in rnd.State())
+{
+    Console.WriteLine(x);
+}
