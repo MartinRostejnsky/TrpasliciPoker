@@ -75,13 +75,25 @@ while (true)
             Console.ReadLine();
         } //
 
-        foreach (string x in games[gamecounter].Rounds[roundcounter].State())
+        int[] Player1Values = new int[games[gamecounter].Rounds[roundcounter].Dices[0].Size];
+        int[] Player2Values = new int[games[gamecounter].Rounds[roundcounter].Dices[0].Size];
+
+        for (int i = 0; i < 5; i++)
         {
-            Console.WriteLine(x);
+            Player1Values[games[gamecounter].Rounds[roundcounter].Dices[i].Value-1]++; 
         }
 
+        for (int i = 5; i < 10; i++)
+        {
+            Player2Values[games[gamecounter].Rounds[roundcounter].Dices[i].Value-1]++;
+        }
 
         roundcounter++;
+
+        foreach (int i in Player1Values)
+        {
+            Console.WriteLine(i);
+        }
     }
 
     Console.WriteLine("Stiskni libovolnou klávesu pro spuštění další hry");
