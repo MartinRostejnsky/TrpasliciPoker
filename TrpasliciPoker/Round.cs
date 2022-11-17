@@ -10,7 +10,7 @@ namespace TrpasliciPoker
     internal class Round
     {
         private List<Dice> _Dices = new List<Dice>();
-        private bool _Value; //Player1Win = true; Player2Win = false; pro "jednoduchost"
+        private bool? _Value; //Player1Win = true; Player2Win = false; pro "jednoduchost"
 
         public Round(int dices)
         {
@@ -37,7 +37,7 @@ namespace TrpasliciPoker
             {
                 try
                 {
-                    result.Add(dice.Locked.ToString() + " " + dice.Value.ToString());
+                    result.Add(dice.Locked.ToString() + " ; " + dice.Value.ToString());
                 }
                 catch
                 {
@@ -54,6 +54,11 @@ namespace TrpasliciPoker
             {
                 dice.Roll();
             }
+        }
+
+        public List<Dice> Dices
+        {
+            get { return _Dices; }
         }
 
         public void SetLock(Dice target, bool value)
@@ -76,7 +81,7 @@ namespace TrpasliciPoker
             target.Locked = (!target.Locked);
         }
 
-        public bool Value
+        public bool? Value
         {
             get { return _Value; }
             set { _Value = value; }

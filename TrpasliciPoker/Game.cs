@@ -12,6 +12,15 @@ namespace TrpasliciPoker
         private int _Player2Wins = 0;
         private List<Round> _Rounds = new List<Round>();
 
+        public void NewRound()
+        {
+            _Rounds.Add(new Round(10));
+        }
+
+        public List<Round> Rounds
+        {
+            get { return _Rounds; }
+        }
         public void Player1Win()
         {
             _Player1Wins++;
