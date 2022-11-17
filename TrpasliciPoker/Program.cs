@@ -38,6 +38,7 @@ while (true)
                 {
                     break;
                 }
+
                 games[gamecounter].Rounds[roundcounter].SwitchLock(games[gamecounter].Rounds[roundcounter].Dices[choice - 1]);
 
 
@@ -50,20 +51,21 @@ while (true)
                 List<String> state = games[gamecounter].Rounds[roundcounter].State();
                 for (int i = 5; i < 10; i++)
                 {
-                    Console.WriteLine(state[i] + "; #" + (i + 1));
+                    Console.WriteLine(state[i] + "; #" + (i - 4));
                 }
                 Console.WriteLine("(Uzamčení ; Hodnota; Číslo kostky)");
                 Console.WriteLine("Zvolte kostku kterou chcete uzamknout (0 pro ukončení tahu)");
                 do
                 {
                     choice = ReadInt();
-                } while ((choice > 10) || (choice < 6) || (choice!=0));
+                } while ((choice > 5) || (choice < 0));
 
                 if (choice == 0)
                 {
                     break;
                 }
-                games[gamecounter].Rounds[roundcounter].SwitchLock(games[gamecounter].Rounds[roundcounter].Dices[choice - 1]);
+
+                games[gamecounter].Rounds[roundcounter].SwitchLock(games[gamecounter].Rounds[roundcounter].Dices[choice + 4]);
 
 
             } while (choice != 0);

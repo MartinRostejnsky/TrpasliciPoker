@@ -21,7 +21,7 @@ namespace TrpasliciPoker
         {
             if (!_Locked)
             {
-                _Value = Random.Shared.Next(1,_Size);
+                _Value = Random.Shared.Next(1,_Size+1);
                 return true;
             }
             else
