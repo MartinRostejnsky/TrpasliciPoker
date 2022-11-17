@@ -3,16 +3,19 @@ using TrpasliciPoker;
 
 List<Game> games = new List<Game>();
 int gamecounter = 0;
-int roundcounter = 0;
+int roundcounter;
+int rollcounter;
 int choice;
 
 while (true)
 {
     games.Add(new Game());
-    while (roundcounter <= 1)
+    roundcounter = 0;
+    while (roundcounter < 2)
     {
         games[gamecounter].NewRound();
-        while (games[gamecounter].Rounds[roundcounter].Value == null)
+        rollcounter = 0;
+        while (rollcounter < 2)
         {
             games[gamecounter].Rounds[roundcounter].Roll();
             Console.WriteLine("Hraje hráč č.1");
@@ -29,7 +32,7 @@ while (true)
                 do
                 {
                     choice = ReadInt();
-                } while ((choice > 5) && (choice < 0));
+                } while ((choice > 5) || (choice < 0));
 
                 if (choice == 0)
                 {
@@ -54,7 +57,7 @@ while (true)
                 do
                 {
                     choice = ReadInt();
-                } while ((choice > 10) && (choice < 6) && (choice!=0));
+                } while ((choice > 10) || (choice < 6) || (choice!=0));
 
                 if (choice == 0)
                 {
@@ -65,9 +68,16 @@ while (true)
 
             } while (choice != 0);
 
+            rollcounter++;
 
             Console.ReadLine();
+        } //
+
+        foreach (string x in games[gamecounter].Rounds[roundcounter].State())
+        {
+            Console.WriteLine(x);
         }
+
 
         roundcounter++;
     }
