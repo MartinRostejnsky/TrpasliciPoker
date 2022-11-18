@@ -71,12 +71,10 @@ while (true)
             } while (choice != 0);
 
             rollcounter++;
-
-            Console.ReadLine();
         } //
 
         int[] Player1Values = new int[games[gamecounter].Rounds[roundcounter].Dices[0].Size];
-        int[] Player2Values = new int[games[gamecounter].Rounds[roundcounter].Dices[0].Size];
+        int[] Player2Values = (int[])Player1Values.Clone();
 
         for (int i = 0; i < 5; i++)
         {
@@ -88,14 +86,93 @@ while (true)
             Player2Values[games[gamecounter].Rounds[roundcounter].Dices[i].Value-1]++;
         }
 
-        roundcounter++;
+        int Player1Ranking = 0;
+        int Player2Ranking = 0;
 
         foreach (int i in Player1Values)
         {
-            Console.WriteLine(i);
+            if (i == 2)
+            {
+                Player1Ranking++;
+            }
+            if (i == 3)
+            {
+                Player1Ranking = 3;
+            }
+            if (i == 4)
+            {
+                Player1Ranking = 7;
+            }
+            if (i == 5)
+            {
+                Player1Ranking = 8;
+            }
         }
-    }
 
+        if ((Player1Values.Count(n => n == 1) == 5) && (Player1Values[5] == 0))
+        {
+            {
+                Player1Ranking = 4;
+            }
+        }
+
+        if ((Player1Values.Count(n => n == 1) == 5) && (Player1Values[0] == 0))
+        {
+            {
+                Player1Ranking = 5;
+            }
+        }
+
+        if ((Player1Values.Count(n => n == 2) == 1) && (Player1Values.Count(n => n == 3) == 1))
+        {
+            Player1Ranking = 6;
+        }
+
+        foreach (int i in Player2Values)
+        {
+            if (i == 2)
+            {
+                Player2Ranking++;
+            }
+            if (i == 3)
+            {
+                Player2Ranking = 3;
+            }
+            if (i == 4)
+            {
+                Player2Ranking = 7;
+            }
+            if (i == 5)
+            {
+                Player2Ranking = 8;
+            }
+        }
+
+        if ((Player2Values.Count(n => n == 1) == 5) && (Player2Values[5] == 0))
+        {
+            {
+                Player2Ranking = 4;
+            }
+        }
+
+        if ((Player2Values.Count(n => n == 1) == 5) && (Player2Values[0]==0))
+        {
+            {
+                Player2Ranking = 5;
+            }
+        }
+
+        if ((Player2Values.Count(n => n == 2) == 1) && (Player2Values.Count(n => n == 3) == 1))
+        {
+            Player2Ranking = 6;
+        }
+
+        Console.WriteLine(Player1Ranking); //Player1Ranking = Skore hrace c.2 a naopak
+        Console.WriteLine(Player2Ranking); //Obracena logika v prumyslu ig, nevim proc to tak funguje ale kdyz to funguje tak na to nebudu sahat
+
+        roundcounter++;
+    }
+    
     Console.WriteLine("Stiskni libovolnou klávesu pro spuštění další hry");
     Console.ReadLine();
     gamecounter++;
