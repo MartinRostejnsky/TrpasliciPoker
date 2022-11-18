@@ -11,7 +11,7 @@ while (true)
 {
     games.Add(new Game());
     roundcounter = 0;
-    while (roundcounter < 2)
+    while (!((games[gamecounter].Player1Wins > 1) || (games[gamecounter].Player2Wins > 1)))
     {
         games[gamecounter].NewRound();
         rollcounter = 0;
@@ -43,6 +43,7 @@ while (true)
 
 
             } while (choice != 0);
+            Console.WriteLine();
 
             Console.WriteLine("Hraje hráč č.2");
 
@@ -69,6 +70,7 @@ while (true)
 
 
             } while (choice != 0);
+            Console.WriteLine();
 
             rollcounter++;
         } //
@@ -167,13 +169,71 @@ while (true)
             Player2Ranking = 6;
         }
 
-        Console.WriteLine(Player1Ranking); //Player1Ranking = Skore hrace c.2 a naopak
-        Console.WriteLine(Player2Ranking); //Obracena logika v prumyslu ig, nevim proc to tak funguje ale kdyz to funguje tak na to nebudu sahat
+        if (Player1Ranking > Player2Ranking)
+        {
+            games[gamecounter].Player1Win();
+            Console.WriteLine("Kolo vyhrává hráč č.1");
+        }
+        else if (Player1Ranking < Player2Ranking)
+        {
+            games[gamecounter].Player2Win();
+            Console.WriteLine("Kolo vyhrává hráč č.2");
+        }
+        else if (Player1Ranking == Player2Ranking)
+        {
+            if (Player1Values.Sum() > Player2Values.Sum())
+            {
+                Console.WriteLine("Kolo vyhrává hráč č.1");
+                games[gamecounter].Player1Win();
+            }
+            else if (Player1Values.Sum() < Player2Values.Sum())
+            {
+                Console.WriteLine("Kolo vyhrává hráč č.2");
+                games[gamecounter].Player2Win();
+            }
+            else if (Player1Values.Sum() == Player2Values.Sum())
+            {
+                int extra1;
+                int extra2;
+                do {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        games[gamecounter].Rounds[roundcounter].Dices.Add(new Dice(6));
+                        games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count())-1].Roll();
+                    }
+                    extra1 = (games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count()) - 2].Value);
+                    extra2 = (games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count()) - 1].Value);
+
+                    Console.WriteLine("Přídavná kostka hráče č.1 má hodnotu " + extra1);
+                    Console.WriteLine("Přídavná kostka hráče č.2 má hodnotu " + extra2);
+                    Console.WriteLine();
+                } while (extra1 == extra2);
+                
+                if (extra1 > extra2)
+                {
+                    games[gamecounter].Player1Win();
+                    Console.WriteLine("Kolo vyhrává hráč č.1");
+                }
+                else
+                {
+                    games[gamecounter].Player2Win();
+                    Console.WriteLine("Kolo vyhrává hráč č.2");
+                }
+            }
+        }
 
         roundcounter++;
     }
+    if (games[gamecounter].Player1Wins == 2)
+    {
+        Console.WriteLine("Hru vyhrává hráč č.1");
+    }
+    else
+    {
+        Console.WriteLine("Hru vyhrává hráč č.2");
+    }
     
-    Console.WriteLine("Stiskni libovolnou klávesu pro spuštění další hry");
+    Console.WriteLine("Stiskni enter pro spuštění další hry");
     Console.ReadLine();
     gamecounter++;
 }

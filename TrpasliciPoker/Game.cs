@@ -30,5 +30,15 @@ namespace TrpasliciPoker
         {
             _Player2Wins++;
         }
+
+        public int Player1Wins
+        {
+            get { return _Player1Wins; }
+        }
+
+        public int Player2Wins
+        {
+            get { return _Player2Wins; }
+        }
     }
 }
