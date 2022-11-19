@@ -88,139 +88,19 @@ while (true)
             Player2Values[games[gamecounter].Rounds[roundcounter].Dices[i].Value-1]++;
         }
 
-        int Player1Ranking = 0;
-        int Player2Ranking = 0;
+        int Player1Ranking = games[gamecounter].Rounds[roundcounter].Rank(Player1Values);
+        int Player2Ranking = games[gamecounter].Rounds[roundcounter].Rank(Player2Values);
 
-        foreach (int i in Player1Values)
+        if (games[gamecounter].Rounds[roundcounter].Value(Player1Ranking, Player2Ranking, Player1Values, Player2Values) == true)
         {
-            if (i == 2)
-            {
-                Player1Ranking++;
-            }
-            if (i == 3)
-            {
-                Player1Ranking = 3;
-            }
-            if (i == 4)
-            {
-                Player1Ranking = 7;
-            }
-            if (i == 5)
-            {
-                Player1Ranking = 8;
-            }
-        }
-
-        if ((Player1Values.Count(n => n == 1) == 5) && (Player1Values[5] == 0))
-        {
-            {
-                Player1Ranking = 4;
-            }
-        }
-
-        if ((Player1Values.Count(n => n == 1) == 5) && (Player1Values[0] == 0))
-        {
-            {
-                Player1Ranking = 5;
-            }
-        }
-
-        if ((Player1Values.Count(n => n == 2) == 1) && (Player1Values.Count(n => n == 3) == 1))
-        {
-            Player1Ranking = 6;
-        }
-
-        foreach (int i in Player2Values)
-        {
-            if (i == 2)
-            {
-                Player2Ranking++;
-            }
-            if (i == 3)
-            {
-                Player2Ranking = 3;
-            }
-            if (i == 4)
-            {
-                Player2Ranking = 7;
-            }
-            if (i == 5)
-            {
-                Player2Ranking = 8;
-            }
-        }
-
-        if ((Player2Values.Count(n => n == 1) == 5) && (Player2Values[5] == 0))
-        {
-            {
-                Player2Ranking = 4;
-            }
-        }
-
-        if ((Player2Values.Count(n => n == 1) == 5) && (Player2Values[0]==0))
-        {
-            {
-                Player2Ranking = 5;
-            }
-        }
-
-        if ((Player2Values.Count(n => n == 2) == 1) && (Player2Values.Count(n => n == 3) == 1))
-        {
-            Player2Ranking = 6;
-        }
-
-        if (Player1Ranking > Player2Ranking)
-        {
-            games[gamecounter].Player1Win();
             Console.WriteLine("Kolo vyhrává hráč č.1");
+            games[gamecounter].Player1Win();
         }
-        else if (Player1Ranking < Player2Ranking)
+        else
         {
             games[gamecounter].Player2Win();
             Console.WriteLine("Kolo vyhrává hráč č.2");
-        }
-        else if (Player1Ranking == Player2Ranking)
-        {
-            if (Player1Values.Sum() > Player2Values.Sum())
-            {
-                Console.WriteLine("Kolo vyhrává hráč č.1");
-                games[gamecounter].Player1Win();
-            }
-            else if (Player1Values.Sum() < Player2Values.Sum())
-            {
-                Console.WriteLine("Kolo vyhrává hráč č.2");
-                games[gamecounter].Player2Win();
-            }
-            else if (Player1Values.Sum() == Player2Values.Sum())
-            {
-                int extra1;
-                int extra2;
-                do {
-                    for (int i = 0; i < 2; i++)
-                    {
-                        games[gamecounter].Rounds[roundcounter].Dices.Add(new Dice(6));
-                        games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count())-1].Roll();
-                    }
-                    extra1 = (games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count()) - 2].Value);
-                    extra2 = (games[gamecounter].Rounds[roundcounter].Dices[(games[gamecounter].Rounds[roundcounter].Dices.Count()) - 1].Value);
-
-                    Console.WriteLine("Přídavná kostka hráče č.1 má hodnotu " + extra1);
-                    Console.WriteLine("Přídavná kostka hráče č.2 má hodnotu " + extra2);
-                    Console.WriteLine();
-                } while (extra1 == extra2);
-                
-                if (extra1 > extra2)
-                {
-                    games[gamecounter].Player1Win();
-                    Console.WriteLine("Kolo vyhrává hráč č.1");
-                }
-                else
-                {
-                    games[gamecounter].Player2Win();
-                    Console.WriteLine("Kolo vyhrává hráč č.2");
-                }
-            }
-        }
+        } 
 
         roundcounter++;
     }

@@ -38,7 +38,6 @@ namespace TrpasliciPoker
         public int Size
         {
             get { return _Size; }
-            set { _Size = value; }
         }
 
         public bool Locked
