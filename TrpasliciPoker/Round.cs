@@ -10,7 +10,6 @@ namespace TrpasliciPoker
     internal class Round
     {
         private List<Dice> _Dices = new List<Dice>();
-        private bool _Value; //Player1Win = true; Player2Win = false; pro "jednoduchost"
 
         public Round(int dices)
         {

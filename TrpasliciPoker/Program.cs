@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using TrpasliciPoker;
+﻿using TrpasliciPoker;
 
 List<Game> games = new List<Game>();
 int gamecounter = 0;
@@ -73,7 +72,7 @@ while (true)
             Console.WriteLine();
 
             rollcounter++;
-        } //
+        }
 
         int[] Player1Values = new int[games[gamecounter].Rounds[roundcounter].Dices[0].Size];
         int[] Player2Values = (int[])Player1Values.Clone();
